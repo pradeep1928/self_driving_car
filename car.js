@@ -14,12 +14,14 @@ class Car {
         // for turning the car left or right
         this.angle = 0;
 
-        this.controls = new Controls();
+        this.sensor = new Sensor(this)             // creating the sensor obj from Sensor class
+        this.controls = new Controls();            // creating the controls obj from Controls class
     }
 
     // Speed control for car
     update() {
         this.#move();
+        this.sensor.update();
     }
 
     #move() {
@@ -48,10 +50,10 @@ class Car {
         if (this.speed != 0) {
             const flip = this.speed > 0 ? 1 : -1;
             if (this.controls.left) {
-                this.angle += 0.03 * flip;
+                this.angle += 0.01 * flip;
             }
             if (this.controls.right) {
-                this.angle -= 0.03 * flip;
+                this.angle -= 0.01 * flip;
             }
         }
 
@@ -73,5 +75,7 @@ class Car {
         ctx.fill();
 
         ctx.restore();
+
+        this.sensor.draw(ctx);               // drawing the sensors on car
     }
 }
