@@ -19,9 +19,9 @@ class Car {
     }
 
     // Speed control for car
-    update() {
+    update(roadBorders) {
         this.#move();
-        this.sensor.update();
+        this.sensor.update(roadBorders);
     }
 
     #move() {
